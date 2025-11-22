@@ -112,7 +112,8 @@ def calculate_dog_years():
       elif dog == 2:
         dog_age = 20
     else:
-      dog_age = dog*7
+      c = dog-2 
+      dog_age = 20 + c*7
 
     print(f"The dog's age in dog years is {dog_age}")
 
