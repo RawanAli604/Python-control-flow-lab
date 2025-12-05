@@ -185,29 +185,41 @@ weather_advice()
 # - Adjust the season based on the day of the month when needed.
 # - Ensure to validate input formats and handle unexpected inputs gracefully.
 def determine_season():
-    month = input(" Enter the month's abbreviation ").capitalize()
+    month = input(" Enter the month's abbreviation ").strip().capitalize()
     day = int(input(" Enter day of month"))
+
     valid_months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
     if month not in valid_months:
         print("month not valid")
-        return
-    if day < 1 or day > 31:
+        return 
+
+
+    month_days = {"Jan": 31, "Feb": 29, "Mar": 31, "Apr": 30, "May": 31, "Jun": 30, "Jul": 31, "Aug": 31, "Sep": 30, "Oct": 31, "Nov": 30, "Dec": 31 }
+
+    if day < 1 or day > month_days[month]:
         print("day not valid")
         return
-    # declar an empty variable
+
     season = None
+
     if (month == "Dec" and day >= 21) or month in ["Jan", "Feb"] or (month == "Mar" and day <= 19):
-        season = "winter"
-    elif (month == "Mar" and day >= 20) or month in ["Apr", "May"] or (month == "Jun" and day <= 10):
-        season = "spring"
+      season = "Winter"
+
+    elif (month == "Mar" and day >= 20) or month in ["Apr", "May"] or (month == "Jun" and day <= 20):
+      season = "Spring"
+
     elif (month == "Jun" and day >= 21) or month in ["Jul", "Aug"] or (month == "Sep" and day <= 21):
-        season = "Summer"
+      season = "Summer"
+
     elif (month == "Sep" and day >= 22) or month in ["Oct", "Nov"] or (month == "Dec" and day <= 20):
-        season = "Fall"
+      season = "Fall"
+
     if season:
-        print(f"{month} {day} is in {season}")
+      print(f"{month} {day} is in {season}")
     else:
-        print("unable to determine season")
+      print("unable to determine season")
+
 # Call the function
 determine_season()
 
@@ -236,7 +248,7 @@ def guess_number():
 
   for attempt in range(1, max+1):
     try:
-     if attempt == max-1:
+     if attempt == max:
         print("Last chance!")
 
      guess = int(input(f"Attempt {attempt}: Enter your guess: "))
